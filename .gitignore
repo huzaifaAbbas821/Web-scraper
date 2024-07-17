@@ -130,8 +130,12 @@ dist
 .pnp.*
 
 
+<<<<<<< HEAD
 node_modules
 text.txt
 display/login.css
 display/register2.css
 display/style.css
+=======
+node_modules
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a

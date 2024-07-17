@@ -18,8 +18,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
           productDiv.innerHTML += `<img src="${product.image}" alt="image">`;
           productDiv.innerHTML += `<h2> ${product.title} </h2>`;
+<<<<<<< HEAD
           // productDiv.innerHTML += `<p>Price: ${product.price}</p>`;
           productDiv.innerHTML += `<div> <p>Price: ${product.price}</p> <button class="scrape-button"> <a href="${product.pageUrl}">Go to Page </a> </button> </div>`;
+=======
+          productDiv.innerHTML += `<p>Price: ${product.price}</p>`;
+          productDiv.innerHTML += `<button class="scrape-button"> <a href="${product.pageUrl}">Go to Page </a> </button>`;
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a
           document.getElementById('productContainer').appendChild(productDiv);
 
           return {

@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const express = require("express");
 const app = express();
+=======
+
+
+
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+const express=require("express");
+const app=express();
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a
 app.use(express.static("display"));
 async function scrapeAmazonProducts(url, fileName) {
   const browser = await puppeteer.launch();
@@ -10,15 +20,24 @@ async function scrapeAmazonProducts(url, fileName) {
   await page.goto(url, { timeout: 1000000 });
 
   // Wait for the product elements to load
+<<<<<<< HEAD
   await page.waitForSelector("div.sg-col-4-of-24");
 
   // Scrape product data
   const products = await page.evaluate(() => {
     const productNodes = document.querySelectorAll("div.a-section");
+=======
+  await page.waitForSelector('div.sg-col-4-of-24');
+
+  // Scrape product data
+  const products = await page.evaluate(() => {
+    const productNodes = document.querySelectorAll('div.a-section');
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a
 
     const productsData = [];
     let count = 0;
 
+<<<<<<< HEAD
     productNodes.forEach((node) => {
       if (count < 100) {
         const titleNode = node.querySelector("h2 > a > span");
@@ -26,12 +45,26 @@ async function scrapeAmazonProducts(url, fileName) {
         const priceNode = node.querySelector("div.a-row > a > span > span");
         const imgNode = node.querySelector("div.a-section > img");
         const pageNode = node.querySelector("h2 > a.a-link-normal");
+=======
+    productNodes.forEach(node => {
+      if (count < 100) {
+        const titleNode = node.querySelector('h2 > a > span');
+        // const priceNode = node.querySelector('div.a-row.a-size-base > div.a-row > a >span.a-price > span.a-offscreen');
+        const priceNode = node.querySelector('div.a-row > a > span > span');
+        const imgNode = node.querySelector('div.a-section > img');
+        const pageNode = node.querySelector('h2 > a.a-link-normal');
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a
 
         if (titleNode && priceNode && imgNode && pageNode) {
           const title = titleNode.textContent.trim();
           const price = priceNode.textContent.trim();
+<<<<<<< HEAD
           const image = imgNode.getAttribute("src");
           const page = pageNode.getAttribute("href");
+=======
+          const image = imgNode.getAttribute('src');
+          const page = pageNode.getAttribute('href');
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a
           const pageUrl = `https://www.amazon.com/${page}`;
 
           productsData.push({ title, price, image, pageUrl });
@@ -46,9 +79,15 @@ async function scrapeAmazonProducts(url, fileName) {
   // await browser.close();
 
   // Save data to a JSON file
+<<<<<<< HEAD
   fs.writeFile(fileName, JSON.stringify(products, null, 2), (err) => {
     if (err) {
       console.error("Error writing file:", err);
+=======
+  fs.writeFile(fileName, JSON.stringify(products, null, 2), err => {
+    if (err) {
+      console.error('Error writing file:', err);
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a
       return;
     }
     console.log(`Data has been successfully written to ${fileName}`);
@@ -58,6 +97,7 @@ async function scrapeAmazonProducts(url, fileName) {
 // Define URLs and file names
 const tasks = [
   {
+<<<<<<< HEAD
     url: "https://www.amazon.com/Grocery-Shopping-Online/s?k=Grocery+Shopping+Online",
     fileName: "./display/products.json",
   },
@@ -81,3 +121,28 @@ app.get("/", (req, res) => {
 app.listen(5000, () => {
   console.log(`server is running on 5000`);
 });
+=======
+    url: 'https://www.amazon.com/Grocery-Shopping-Online/s?k=Grocery+Shopping+Online',
+    fileName: './display/products.json'
+  },
+   {
+     url: 'https://www.amazon.com/Grocery-Shopping-Online/s?k=Grocery+Shopping+Online&page=2&qid=1704379250&ref=sr_pg_1',
+     fileName: './display/products1.json'
+   },
+  {
+    url: 'https://www.amazon.com/s?k=Grocery+Shopping+Online&page=5&qid=1704381170&ref=sr_pg_4',
+    fileName: './display/products2.json'
+  }
+];
+
+// Loop through tasks and scrape data
+tasks.forEach(task => {
+  scrapeAmazonProducts(task.url, task.fileName);
+});
+app.get("/",(req,res)=>{
+  res.sendFile("index.html")
+})
+app.listen(5000, () => {
+  console.log(`server is running on 3000`)
+});
+>>>>>>> b04102634b595b0bd13600dac275bfbd3d8b619a
